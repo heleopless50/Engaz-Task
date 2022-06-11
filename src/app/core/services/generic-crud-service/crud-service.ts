@@ -24,7 +24,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
   }
 
   findAll(): Observable<T[]> {
-    return this._http.get<T[]>(this._base)
+    return this._http.get<T[]>(this._base);
   }
 
   delete(id: ID): Observable<T> {
