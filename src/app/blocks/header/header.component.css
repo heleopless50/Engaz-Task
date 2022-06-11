@@ -3,9 +3,9 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: #1976d2;
     color: white;
     font-weight: 600;
@@ -15,26 +15,24 @@
     margin: 0 16px;
   }
 
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
+.header-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
+  .app-title{
+    font-size: 2vw;
 
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
   }
 
   nav>ul{
     list-style: none;
   }
+
   nav>ul>li>button{
-    margin-right: 10px;
+    margin-right: 15px;
     padding: 10px;
     padding-inline: 15px;
     background-color: #051b32;

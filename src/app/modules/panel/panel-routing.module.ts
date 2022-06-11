@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllCommentsComponent } from './all-comments/all-comments.component';
+import { AllPostsComponent } from './all-posts/all-posts.component';
+import { CommentControlComponent } from './comment-control/comment-control.component';
+import { PostControlComponent } from './post-control/post-control.component';
 
 const routes: Routes = [
-  // { path: 'posts/all', component: ProductListComponent },
-  // { path: 'posts/control', component: ProductListComponent },
-  // { path: 'comments/all', component: ProductListComponent },
-  // { path: 'comments/control', component: ProductListComponent },
-
+  { path: 'posts/all', component: AllPostsComponent },
+  { path: 'posts/control', component: PostControlComponent },
+  { path: 'posts', redirectTo: 'posts/all' },
+  { path: 'comments/all', component: AllCommentsComponent },
+  { path: 'comments/control', component: CommentControlComponent },
+  { path: 'comments', redirectTo: 'comments/all' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PanelRoutingModule { }
+export class PanelRoutingModule {}

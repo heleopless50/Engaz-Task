@@ -6,23 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { BlocksModule } from './blocks/blocks.module';
 import { AppComponent } from './blocks/root/app.component';
 import { CoreModule } from './core/core.module';
-import { PostCrudService } from './core/services/crud-services/post-crud.service';
 import { SharedModule } from './shared/shared.module';
-
+import { MainButtonsComponent } from './blocks/main-buttons/main-buttons.component';
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [MainButtonsComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     SharedModule,
     CoreModule,
     BlocksModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
