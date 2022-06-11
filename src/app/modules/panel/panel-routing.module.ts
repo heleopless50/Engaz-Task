@@ -7,8 +7,9 @@ import { PostControlComponent } from './post-control/post-control.component';
 
 const routes: Routes = [
   { path: 'posts/all', component: AllPostsComponent },
-  { path: 'posts/control', component: PostControlComponent },
   { path: 'posts', redirectTo: 'posts/all' },
+  { path: 'posts/control', component: PostControlComponent },
+  { path: 'posts/control/:id', component: PostControlComponent },
   { path: 'comments/all', component: AllCommentsComponent },
   { path: 'comments/control', component: CommentControlComponent },
   { path: 'comments', redirectTo: 'comments/all' },
