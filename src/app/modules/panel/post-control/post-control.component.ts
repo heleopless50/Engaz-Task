@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { find, map } from 'rxjs';
 import { Post } from 'src/app/core/models/post';
-import { PostCrudService } from 'src/app/core/services/crud-services/post-crud.service';
 import { PostsStorageService } from 'src/app/core/storage/posts-storage.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-post-control',
   templateUrl: './post-control.component.html',
@@ -21,7 +19,8 @@ export class PostControlComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private postsDb: PostsStorageService,
-    private router:Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.form = this.fb.group({
       id: ['true', [Validators.required]],
@@ -37,8 +36,8 @@ export class PostControlComponent implements OnInit {
       this.postsDb.$postDb.subscribe((data) => {
         this.posts = data;
         this.post = this.posts.find((a) => a.id == this.postId) as Post;
-        this.form.patchValue(this.post)
-        if(this.post)this.adding = false;
+        this.form.patchValue(this.post);
+        if (this.post) this.adding = false;
       });
     }
   }
@@ -62,16 +61,24 @@ export class PostControlComponent implements OnInit {
 
   submit() {
     if (this.adding) {
-      let newData = [...this.posts,new Post(+this.posts[this.posts.length-1].id! + 1 , +this.userId, this.title, this.body)];
+      this.toastr.success('Post Added Successfully','adding post')
+      let newData = [
+        ...this.posts,
+        new Post(
+          +this.posts[this.posts.length - 1].id! + 1,
+          +this.userId,
+          this.title,
+          this.body
+        ),
+      ];
       // this.postsDb.addPost(newPost);
       this.postsDb.$postDb.next(newData);
     } else if (!this.adding) {
-      console.log("gdfklgd;")
+      console.log('gdfklgd;');
       let updatedPost = new Post(+this.id, +this.userId, this.title, this.body);
-      this.postsDb.replacePost(this.posts,updatedPost, +this.id);
-
+      this.postsDb.replacePost(this.posts, updatedPost, +this.id);
     }
 
-this.router.navigate(["/panel/posts"])
+    this.router.navigate(['/panel/posts']);
   }
 }
