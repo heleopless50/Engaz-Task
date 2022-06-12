@@ -5,7 +5,7 @@ import { filter, map, take } from 'rxjs';
 import { Post } from 'src/app/core/models/post';
 import { PostCrudService } from 'src/app/core/services/crud-services/post-crud.service';
 import { PostsStorageService } from 'src/app/core/storage/posts-storage.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-all-posts',
   templateUrl: './all-posts.component.html',
@@ -17,7 +17,9 @@ export class AllPostsComponent implements OnInit , DoCheck{
   posts: Post[] = [];
   constructor(
     private postCrudService: PostCrudService,
-    private postsDB: PostsStorageService
+    private postsDB: PostsStorageService,
+    private toastr:ToastrService
+
   ) {}
   ngDoCheck(): void {
     this.pageNumber = Math.ceil(this.posts.length / 10);
@@ -36,6 +38,7 @@ export class AllPostsComponent implements OnInit , DoCheck{
   }
 
   deletePost(id: any) {
+    this.toastr.info("Post Deleted Successfully","deleted")
     this.posts = this.posts.filter((a) => a.id != id);
     this.postsDB.$postDb.next(this.posts);
     this.pageNumber = Math.ceil(this.posts.length / 10);

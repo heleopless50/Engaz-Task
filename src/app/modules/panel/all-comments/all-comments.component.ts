@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Commenta } from 'src/app/core/models/commenta';
 import { CommentCrudService } from 'src/app/core/services/crud-services/comment-crud.service';
 import { CommentsStorageService } from 'src/app/core/storage/comments-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-all-comments',
@@ -15,7 +16,8 @@ export class AllCommentsComponent implements OnInit {
   comments: Commenta[] = [];
   constructor(
     private commentCrudService: CommentCrudService,
-    private commentsDb: CommentsStorageService
+    private commentsDb: CommentsStorageService,
+    private toastr:ToastrService
   ) {}
   ngDoCheck(): void {
     this.pageNumber = Math.ceil(this.comments.length / 100);
@@ -34,6 +36,7 @@ export class AllCommentsComponent implements OnInit {
   }
 
   deleteComment(id: any) {
+    this.toastr.info("Comment Deleted Successfully","deleted")
     this.comments = this.comments.filter((a) => a.id != id);
     this.commentsDb.$commentDb.next(this.comments);
     this.pageNumber = Math.ceil(this.comments.length / 100);

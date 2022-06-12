@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Commenta } from 'src/app/core/models/commenta';
 import { CommentsStorageService } from 'src/app/core/storage/comments-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-comment-control',
@@ -19,7 +20,8 @@ export class CommentControlComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private commentsDb: CommentsStorageService,
-    private router: Router
+    private router: Router,
+    private toastr : ToastrService
   ) {
     this.form = this.fb.group({
       id: ['true', [Validators.required]],
@@ -67,6 +69,7 @@ export class CommentControlComponent implements OnInit {
 
   submit() {
     if (this.adding) {
+      this.toastr.success('Comment Added Successfully','adding post')
       let newData = [
         ...this.comments,
         new Commenta(
@@ -79,6 +82,7 @@ export class CommentControlComponent implements OnInit {
       ];
       this.commentsDb.$commentDb.next(newData);
     } else if (!this.adding) {
+      this.toastr.success('Comment Updated Successfully','update post')
       let updatedComment = new Commenta(
         +this.id,
         +this.postId,

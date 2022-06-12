@@ -74,7 +74,7 @@ export class PostControlComponent implements OnInit {
       // this.postsDb.addPost(newPost);
       this.postsDb.$postDb.next(newData);
     } else if (!this.adding) {
-      console.log('gdfklgd;');
+      this.toastr.success('Post Updated Successfully','update post')
       let updatedPost = new Post(+this.id, +this.userId, this.title, this.body);
       this.postsDb.replacePost(this.posts, updatedPost, +this.id);
     }
