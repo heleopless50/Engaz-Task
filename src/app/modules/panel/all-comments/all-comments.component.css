@@ -1,16 +1,19 @@
-.table-wrapper {
-  background: #fff;
-  padding: 20px 25px;
-  margin: 30px 0;
-border-radius: 3px;
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+.body-wrapper{
+  max-width: 85%;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+.thetable{
+  max-width: 100%;
+  overflow: scroll;
 }
 .table-title {
 padding-bottom: 15px;
 background: #435d7d;
 color: #fff;
 padding: 16px 30px;
-margin: -20px -25px 10px;
+
 border-radius: 3px 3px 0 0;
 }
 .table-title h2 {
@@ -91,6 +94,12 @@ border-radius: 50%;
 vertical-align: middle;
 margin-right: 10px;
 }
+
+table.table{
+  max-width: 100%;
+  overflow: scroll;
+}
+
 .pagination {
   float: right;
   margin: 0 0 5px;
