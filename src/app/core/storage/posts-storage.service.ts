@@ -29,10 +29,7 @@ export class PostsStorageService {
     this.$postDb.next(posts);
   }
 
-  checkIfIdExist(id: Number) {
-    return this.$postDb.pipe(map(a=>a.filter(s=>s.id == id)));
 
-  }
 
 
 

@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'posts/control/:id', component: PostControlComponent },
   { path: 'comments/all', component: AllCommentsComponent },
   { path: 'comments/control', component: CommentControlComponent },
+  { path: 'comments/control/:id', component: CommentControlComponent },
   { path: 'comments', redirectTo: 'comments/all' },
 ];
 

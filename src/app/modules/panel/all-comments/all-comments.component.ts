@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Commenta } from 'src/app/core/models/commenta';
+import { CommentCrudService } from 'src/app/core/services/crud-services/comment-crud.service';
+import { CommentsStorageService } from 'src/app/core/storage/comments-storage.service';
 
 @Component({
   selector: 'app-all-comments',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllCommentsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  pageNumber: number = 0;
+  startIndex: number = 0;
+  comments: Commenta[] = [];
+  constructor(
+    private commentCrudService: CommentCrudService,
+    private commentsDb: CommentsStorageService
+  ) {}
+  ngDoCheck(): void {
+    this.pageNumber = Math.ceil(this.comments.length / 100);
   }
 
+  ngOnInit(): void {
+    this.commentCrudService.findAll().subscribe((comments) => {
+      if (!this.commentsDb.gotData) {
+        this.commentsDb.$commentDb.next(comments);
+        this.commentsDb.gotData = true;
+      }
+      this.pageNumber = Math.ceil(comments.length / 100);
+    });
+
+    this.commentsDb.$commentDb.subscribe((comments) => (this.comments = comments));
+  }
+
+  deleteComment(id: any) {
+    this.comments = this.comments.filter((a) => a.id != id);
+    this.commentsDb.$commentDb.next(this.comments);
+    this.pageNumber = Math.ceil(this.comments.length / 100);
+  }
+
+  otherPage(x: number) {
+    this.startIndex = x * 100 - 1 + 1;
+  }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardGuard } from './auth/auth-guard.guard';
 import { MainButtonsComponent } from './blocks/main-buttons/main-buttons.component';
 
 const routes: Routes = [
@@ -7,7 +8,7 @@ const routes: Routes = [
   {
     path: 'panel',
     loadChildren: () =>
-      import('./modules/panel/panel.module').then((x) => x.PanelModule),
+      import('./modules/panel/panel.module').then((x) => x.PanelModule),canActivate: [AuthGuardGuard]
   },
   {
     path: 'auth',

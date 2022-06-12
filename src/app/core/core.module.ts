@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { CoreRoutingModule } from './core-routing.module';
 import { throwIfAlreadyLoaded } from './utils/module-import-guard';
 import { SharedModule } from '../shared/shared.module';
-// import {AngularFireAuth} from '@angular/fire/auth'
 
 
 @NgModule({

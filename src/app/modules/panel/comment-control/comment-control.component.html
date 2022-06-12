@@ -1,1 +1,28 @@
-<p>comment-control works!</p>
+<div class="container">
+  <form [formGroup]="this.form" (ngSubmit)="submit()">
+    <h1>{{ adding ? "Add New Post" : "Update the Post" }}</h1>
+
+
+      <div class="form-group" [hidden]="true" value ="55">
+        <label for="id">id:</label>
+        <input type="text" id="id" name="id" formControlName="id"  [disabled]="!adding" />
+      </div>
+      <label for="postId">post id:</label>
+      <input type="number" id="postId" name="postId" formControlName="postId">
+
+
+      <label for="name">name:</label>
+      <input type="text" id="name" name="name" formControlName="name">
+
+
+      <label for="email">email:</label>
+      <input type="text" id="email" name="email" formControlName="email" />
+
+      <label for="body">Body:</label>
+      <textarea type="text" id="body" name="body" formControlName="body"></textarea>
+
+
+    <button type="submit" [disabled]="!form.valid">{{ adding ? "Create" : "Update" }}</button>
+    {{form.valid }}
+  </form>
+</div>

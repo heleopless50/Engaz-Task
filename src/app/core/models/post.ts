@@ -1,4 +1,3 @@
-import { NumberSymbol } from "@angular/common";
 
 export class Post {
   public userId?: number;
